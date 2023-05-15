@@ -11,7 +11,7 @@ const { notFound, errorHandler } = require("./middlewares/errorHandler");
 const morgan=require("morgan");
 //Database connection
 dbConnect();
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
