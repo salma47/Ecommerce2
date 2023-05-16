@@ -1,6 +1,8 @@
 const Product = require("../models/productModel");
 const asyncHandler =require("express-async-handler");
+const User = require("../models/userModel");
 const slugify =require("slugify");
+const validateMongoDbId = require("../utils/validateMongodbId");
 
 
 const createProduct = asyncHandler(async(req,res)=>{
@@ -115,6 +117,22 @@ const getAllProduct = asyncHandler(async(req,res)=>{
 
        const product = await query;
         res.json(product);
+        
+    } catch (error) {
+        throw new Error(error)
+        
+    }
+});
+
+//////whishlist fonctionality
+const addToWhishList= asyncHandler(async(req,res)=>{
+    const{_id}=req.user;
+    const {prodId}=req.body;
+
+    try {
+        //we need to find the logged user
+        const user = User.findById(_id);
+        const 
         
     } catch (error) {
         throw new Error(error)
