@@ -11,14 +11,16 @@ const sendEmail =require("./emailCtrl")
 
 //Create a user
 const createUser = asyncHandler(async(req, res)=> {
+    // take the email from req.body
     const email = req.body.email;
+    // with the help of the email find if user exist or not
     const findUser= await User.findOne({email:email});
     if (!findUser){
-        //create a new user
+        //if user not found create a new user
         const newUser= await User.create(req.body);
         res.json(newUser);
     } else {
-        //user already exist
+        //if user already exist throw error
         throw new Error("User already exists");
     }
 });
